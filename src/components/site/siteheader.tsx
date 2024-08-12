@@ -8,6 +8,7 @@ import Link from "next/link";
 import { UserButton, useUser } from "@clerk/nextjs";
 
 const SiteHeader = () => {
+  const url = `http://shrit.${process.env.NEXT_PUBLIC_DOMAIN}`;
   const user = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const menuItems = [
@@ -50,7 +51,9 @@ const SiteHeader = () => {
       {user.isLoaded && user.isSignedIn ? (
         <div className="flex gap-4">
           <UserButton />
-          <Button>Dashboard</Button>
+          <Link href={url}>
+            <Button>Dashboard</Button>
+          </Link>
         </div>
       ) : (
         <Link href="/sign-in">
